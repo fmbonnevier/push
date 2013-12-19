@@ -1,0 +1,115 @@
+html body {
+	background-color: white; 
+	.wl-content-card .hearted .ico { background-position: -320px -80px; }
+	.wl-dialog { 
+		z-index: 0; 
+		.ui-dialog { z-index: 0; }
+	}
+
+	.wl-application-footer {
+		padding: 5em 3em;
+	
+		.newsletter { 
+		margin: 0 auto; 
+		width: 50%;
+			.newsletter--background {background: #F6F4F2; }
+			.wl-htb-x--decor { padding-bottom: 1px; }
+				.bird { margin-left: 0px; }
+		}
+	}
+
+	 .wl-page-wrap {
+		width: auto;
+	}
+
+	 #footer-container { 
+		padding-top: 1px;
+		min-width: 0px;
+		background: url('http://www.freepeople.com/resources/_shared/images/backgrounds/border-50.png');
+
+		.bg { background: #f6f4f2; }
+
+	}
+
+	.wl-dialog--ht { 
+		.ui-dialog { background: none; }
+		.ui-dialog-content { box-shadow: none; }
+	}
+
+	.wl-dialog--ht--fpme { 
+		padding: 0px 0px 50px 0px; 
+		background: #fff; 
+	}
+
+	.wl-product-fpme { 
+		margin-top: 52px; 
+		.fpme-section-pics { margin: 0px 50px;}
+		.fpme-preview-section .wl-content-card, .fpme-empty { float: none; display: inline-block; }
+	}
+
+	.wl-product-fpme .fpme-section-pics { margin: 0px 50px;}
+	
+	.wl-product-fpme {
+		.content { text-align: center; }
+		.body-inner  { 
+			width: 100%; 
+		}
+	}
+	
+	.wl-product-fpme .fpme-section-body {
+		display: inline-block; 
+
+		.fpme-preview-section { width: inherit;}
+	}
+
+	.wl-application-footer { 
+	margin: 0 auto;
+	background: url('http://dev-us.freepeople.com/pushNotifications/pushNotifications/pushNotifications/images/resources/_shared/images/backgrounds/border-50.png');
+		.content {
+			margin: 1px;
+			background: white;
+		}
+	}
+}
+
+
+
+@media screen and (max-width: 960px) { 
+	html body {
+		.wl-application-footer .newsletter { width: 80%; }
+		.wl-product-preview--quickview .media .img-options  { 
+		width: 100%;
+		}
+		.wl-page-decor--3{ background-image: none; }
+		.wl-product-preview--quickview .media {
+			padding-right: 0px; 
+
+			.img-options {	
+				position: static; 
+
+				.option { 
+					display: block;
+					float: left; 
+					width: 53px; 
+					margin-left: 0px; 
+				}
+			}
+		}
+	}
+}
+
+.wl-product-details .description.is-active +.form { opacity: 1; }
+
+@media screen and (max-width: 500px) {
+	html body {
+		.wl-application-banner .nav {
+			.node--currency.node { display: none; }
+			.node--flag.node { display: none; }
+			.node--hearts.node { display: none; }
+		}
+	}	
+}
+
+@media screen and (max-width: 420px) {
+	html body .wl-product-preview--quickview .media .img-options .option { width: 40px; }
+}
