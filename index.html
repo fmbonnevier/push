@@ -769,6 +769,47 @@
 
 
     </script>
+    <script>
+    ( function( window, undefined ) {
+ 
+        "use strict";
+        var document = window.document;
+        var websitePushID = 'web.com.weblinc.freepeople.framework';
+        var webServiceURL = 'https://framework.freepeople.weblinc.com';
+ 
+        function checkForPushPermissions() {
+                if( ! ( 'safari' in window ) || ! ( 'pushNotification' in window.safari ) ) {
+                        return false;
+                }
+ 
+                console.log( '------------------------------------' );
+                console.log( 'checking the permission status...' );
+                var permissionData = window.safari.pushNotification.permission( websitePushID );
+                _checkPermissionStatus( permissionData );
+                return true;
+        }
+ 
+        function _checkPermissionStatus( permissionData ) {
+                var permission = permissionData.permission;
+                var userInfo = {};
+ 
+                console.log( 'checking the returned permission data...' );
+ 
+                if( 'default' === permission ) {
+                        console.log( 'permission marked as "default"; requesting permission from the user...' );
+                        window.safari.pushNotification.requestPermission( webServiceURL, websitePushID, userInfo, _checkPermissionStatus );
+                } else if( 'denied' === permission ) {
+                        console.log( 'permission marked as "denied"' );
+                } else if( 'granted' === permission ) {
+                        console.log( 'permission marked as "granted"' );
+                }
+        }
+ 
+        checkForPushPermissions();
+ 
+} )( window );
+
+</script>
 
 
 
