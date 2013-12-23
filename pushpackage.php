@@ -1,7 +1,7 @@
 
 <?php
 
-$file = '/fp.pushpackage/pushpackage.zip';
+$file = '/fp.pushpackage/fp.pushpackage.zip';
 
 if(file_exists($file)) {
 
