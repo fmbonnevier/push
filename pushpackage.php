@@ -1,6 +1,8 @@
 
 <?php
 
+phpinfo();
+
 $file = '/fp.pushpackage/fp.pushpackage.zip';
 
 if(file_exists($file)) {
