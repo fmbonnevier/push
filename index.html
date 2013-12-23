@@ -781,6 +781,7 @@ var checkRemotePermission = function (permissionData) {
     else if (permissionData.permission === 'denied') {
         // The user said no.
         console.log('denied');
+        console.log(permissionData);
     }
     else if (permissionData.permission === 'granted') {
         // The web service URL is a valid push provider, and the user said yes.
