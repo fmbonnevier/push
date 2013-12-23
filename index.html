@@ -758,45 +758,40 @@
 
 
     </script>
-    <script>
-    ( function( window, undefined ) {
+<script>
+
+document.body.onload = function() {
+    // Ensure that the user can receive Safari Push Notifications.
+    if ('safari' in window && 'pushNotification' in window.safari) {
+        var permissionData = window.safari.pushNotification.permission('web.com.example.domain');
+        checkRemotePermission(permissionData);
+    }
+};
  
-        "use strict";
-        var document = window.document;
-        var websitePushID = 'web.com.weblinc.freepeople.framework';
-        var webServiceURL = 'https://framework.freepeople.weblinc.com';
- 
-        function checkForPushPermissions() {
-                if( ! ( 'safari' in window ) || ! ( 'pushNotification' in window.safari ) ) {
-                        return false;
-                }
- 
-                console.log( '------------------------------------' );
-                console.log( 'checking the permission status...' );
-                var permissionData = window.safari.pushNotification.permission( websitePushID );
-                _checkPermissionStatus( permissionData );
-                return true;
-        }
- 
-        function _checkPermissionStatus( permissionData ) {
-                var permission = permissionData.permission;
-                var userInfo = {};
- 
-                console.log( 'checking the returned permission data...' );
- 
-                if( 'default' === permission ) {
-                        console.log( 'permission marked as "default"; requesting permission from the user...' );
-                        window.safari.pushNotification.requestPermission( webServiceURL, websitePushID, userInfo, _checkPermissionStatus );
-                } else if( 'denied' === permission ) {
-                        console.log( 'permission marked as "denied"' );
-                } else if( 'granted' === permission ) {
-                        console.log( 'permission marked as "granted"' );
-                }
-        }
- 
-        checkForPushPermissions();
- 
-} )( window );
+var checkRemotePermission = function (permissionData) {
+    if (permissionData.permission === 'default') {
+        // This is a new web service URL and its validity is unknown.
+        window.safari.pushNotification.requestPermission(
+            'https://framework.freepeople.weblinc.com', // The web service URL.
+            'web.com.weblinc.freepeople.framework',     // The Website Push ID.
+            {}, // Data that you choose to send to your server to help you identify the user.
+            checkRemotePermission         // The callback function.
+        );
+    }
+    else if (permissionData.permission === 'denied') {
+        // The user said no.
+        console.log('denied');
+    }
+    else if (permissionData.permission === 'granted') {
+        // The web service URL is a valid push provider, and the user said yes.
+        // permissionData.deviceToken is now available to use.
+        console.log('GRANTED!!!');
+        console.log(permissionData);
+        console.log(permissionData.permission);
+
+    }
+};
+
 
 </script>
 
