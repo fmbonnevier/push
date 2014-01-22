@@ -3,12 +3,10 @@
     <head>
         <meta charset=utf-8 />
         <title>Push Notifications</title>
-        <link rel="stylesheet" href="http://www.freepeople.com/resources/us/packages/css/framework-min-84d91470a3a2915e25c7c2293d8aeefc.css?20">
-        <link rel="stylesheet" href="http://www.freepeople.com/resources/us/packages/css/home-min-6a7855ee0d62e94ba9b15dd8afc87a43.css?20" />
 
-        <link rel="stylesheet" href="http://www.freepeople.com/resources/us/packages/css/layout-min-db20dcbb8472c9d00a13db26db410fdd.css?20" />
-
-
+        <link rel="stylesheet" href="https://www.freepeople.com/resources/us/packages/css/framework-min-dddcabafb3d4f0ffdb21da44e6e1ddbb.css?20"/>
+        <link rel="stylesheet" href="https://www.freepeople.com/resources/us/packages/css/home-min-6a7855ee0d62e94ba9b15dd8afc87a43.css?20"/>
+	<link rel="stylesheet" href="https://www.freepeople.com/resources/us/packages/css/layout-min-fab5ddd46663edefc0e62311d1962459.css?20" />
         <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:400,600,600italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="stylesheets/styles.css" />
         <link rel="stylesheet" href="stylesheets/responsive-dialog.css"/>
@@ -230,9 +228,9 @@
                                                     , navigation_id: "0faf6f21-9a78-4000-b95b-08b8eed14e0e"
                                                 }
                                             </script>
-                                            <script type="text/javascript">
+				    <!--<script type="text/javascript">
                                                 (function(a,b,c,d){ a='//tags.tiqcdn.com/utag/freepeople/us/dev/utag.js'; b=document;c='script';d=b.createElement(c);d.src=a;d.type='text/java'+c;d.async=true; a=b.getElementsByTagName(c)[0];a.parentNode.insertBefore(d,a); })();
-                                            </script>
+                                            </script>-->
                                         </div>
                                     </div>
                                 </div>
@@ -735,31 +733,10 @@
         </div>
          </div>
     </body>
-    <script src="http://www.freepeople.com/resources/us/packages/js/lib-min-65e7313f48b3c7cde4d69c33acdad03d.js?20">
-    </script>
-    <script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="https://www.freepeople.com/resources/us/packages/js/lib-min-70618690876f14e6df8501b168891155.js?20"></script>
 
-        WEBLINC.widgets.init(document);
-
-        $('.action--heart').click(function(e) {
-            var $this = $(this),
-                txt = $this.find('.txt'); 
-                number = $this.find('.txt').text(),
-                $this.toggleClass('hearted');
-            
-            if($this.hasClass('hearted')) {
-                txt.text( Number(number) + 1 );
-            } else {
-                txt.text( Number(number) - 1 );
-            }
-            e.preventDefault();
-        });
-
-
-
-    </script>
 <script>
-
 document.body.onload = function() {
     // Ensure that the user can receive Safari Push Notifications.
     if ('safari' in window && 'pushNotification' in window.safari) {
@@ -772,31 +749,52 @@ var checkRemotePermission = function (permissionData) {
     if (permissionData.permission === 'default') {
         // This is a new web service URL and its validity is unknown.
         window.safari.pushNotification.requestPermission(
-            'https://framework.freepeople.weblinc.com', // The web service URL.
+            'https://framework.freepeople.weblinc.com/push', // The web service URL.
             'web.com.weblinc.freepeople.framework',     // The Website Push ID.
             {}, // Data that you choose to send to your server to help you identify the user.
             checkRemotePermission         // The callback function.
         );
+	console.log(permissionData.permission);
+
     }
     else if (permissionData.permission === 'denied') {
         // The user said no.
-        console.log('denied');
-        console.log(permissionData);
-    }
+    
+	console.log(permissionData.permission);
+
+	}
     else if (permissionData.permission === 'granted') {
         // The web service URL is a valid push provider, and the user said yes.
         // permissionData.deviceToken is now available to use.
-        console.log('GRANTED!!!');
-        console.log(permissionData);
-        console.log(permissionData.permission);
+	
+	var token = permissionData.deviceToken;
+
+	window.alert(token);
 
     }
 };
 
 
-</script>
+        $('.action--heart').click(function(e) {
+            var $this = $(this),
+                txt = $this.find('.txt'); 
+                number = $this.find('.txt').text(),
+                $this.toggleClass('hearted');
+        	    
+	if($this.hasClass('hearted')) {
+                txt.text( Number(number) + 1 );
+		$.post( "/send/simplepush.php", { title: "Free People Hearted", body: "Someone hearted your pic!"} );
+            } else {
+                txt.text( Number(number) - 1 );
+            }
+            e.preventDefault();
+        });
 
 
 
-    <!-- <script src="subscribe.js"></script> -->
+ </script>
+
+
+
 </html>
+

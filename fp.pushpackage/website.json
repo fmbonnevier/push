@@ -1,8 +1,0 @@
-{
-	"websiteName": "Free People",
-	"websitePushID": "web.com.weblinc.freepeople.framework",
-	"allowedDomains": ["http://framework.freepeople.weblinc.com"],
-	"urlFormatString": "http://framework.freepeople.weblinc.com/&@",
-	"authenticationToken" : "",
-	"webServiceURL": "https://framework.freepeople.weblinc.com/push/request"
-}
